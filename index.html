@@ -1,0 +1,1445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Portal</title>
+</head>
+
+<link rel="stylesheet" href="style.css">
+<body>
+
+<div class="container">
+
+<!--LOGIN-->
+
+<div class="page active" id="login">
+
+    <div class="login">
+
+        <div class="logo-emoji">🎓</div>
+
+        <h1>STUDENT PORTAL</h1>
+
+        <p>
+            Your all-in-one student information portal
+        </p>
+
+        <div class="card">
+
+            <div class="input-group">
+
+                <label>Student ID:</label>
+
+                <input
+                    id="student-id"
+                    type="text"
+                    inputmode="numeric"
+                    pattern="[0-9]*"
+                    maxlength="20"
+                    placeholder="Enter Student ID"
+                    oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                >
+
+            </div>
+
+            <div class="input-group">
+
+                <label>Password:</label>
+
+                <input
+                    id="password"
+                    type="password"
+                    placeholder="Enter Password"
+                >
+
+            </div>
+
+            <button
+                class="btn"
+                onclick="login()"
+            >
+                LOG IN
+            </button>
+
+            <div class="link">
+                Forget Password?
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!--DASHBOARD-->
+
+<div class="page" id="dashboard">
+
+    <div class="header">
+
+        <span onclick="toggleMenu()">☰</span>
+
+        <span>DASHBOARD</span>
+
+        <span
+            class="notification-wrapper"
+            onclick="openNotifications()"
+            title="Notifications"
+        >
+            🔔
+            <span
+                class="notification-badge"
+                id="notification-badge"
+            >
+                3
+            </span>
+        </span>
+
+    </div>
+
+
+    <!-- NAVIGATION MENU -->
+
+    <div
+        class="navigation-menu"
+        id="navigation-menu"
+    >
+
+        <div onclick="openMenuPage('dashboard')">
+            🏠 <span>Dashboard</span>
+        </div>
+
+        <div onclick="openMenuPage('subjects')">
+            📚 <span>Subjects</span>
+        </div>
+
+        <div onclick="openMenuPage('grades')">
+            📊 <span>Grades</span>
+        </div>
+
+        <div onclick="openMenuPage('schedule')">
+            🗓️ <span>Schedule</span>
+        </div>
+
+        <div onclick="openMenuPage('attendance')">
+            ✅ <span>Attendance</span>
+        </div>
+
+        <div onclick="openMenuPage('announcements')">
+            📢 <span>Announcements</span>
+        </div>
+
+        <div onclick="openMenuPage('notifications')">
+            🔔 <span>Notifications</span>
+        </div>
+
+        <div onclick="logout()">
+            🚪 <span>Logout</span>
+        </div>
+
+    </div>
+
+
+    <div class="welcome">
+
+        <img
+            src="profile.jpg"
+            alt="Student Profile"
+        >
+
+        <div>
+
+            <div>Welcome,</div>
+
+            <div>
+                <b style="font-size:18px">
+                    Jeric Morbos
+                </b>
+            </div>
+
+            <div style="font-size:12px">
+                Student ID: 24173822
+            </div>
+
+            <div style="font-size:12px">
+                Section: BSIT-3D
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="grid">
+
+        <!-- ATTENDANCE -->
+
+        <div
+            class="grid-item"
+            onclick="openAttendance()"
+        >
+
+            <img
+                src="https://cdn-icons-png.flaticon.com/512/3652/3652191.png"
+                alt="Attendance"
+            >
+
+            <div>
+                <b>ATTENDANCE</b>
+            </div>
+
+        </div>
+
+
+        <!-- SUBJECTS -->
+
+        <div
+            class="grid-item"
+            onclick="openSubjects()"
+        >
+
+            <div
+                style="
+                    font-size:50px;
+                    margin-bottom:10px;
+                "
+            >
+                📚
+            </div>
+
+            <div>
+                <b>SUBJECTS</b>
+            </div>
+
+        </div>
+
+
+        <!-- SCHEDULE -->
+
+        <div
+            class="grid-item"
+            onclick="openSchedule()"
+        >
+
+            <img
+                src="https://cdn-icons-png.flaticon.com/512/3208/3208671.png"
+                alt="Schedule"
+            >
+
+            <div>
+                <b>SCHEDULE</b>
+            </div>
+
+        </div>
+
+
+        <!-- GRADES -->
+
+        <div
+            class="grid-item"
+            onclick="openGrades()"
+        >
+
+            <img
+                src="https://cdn-icons-png.flaticon.com/512/2910/2910791.png"
+                alt="Grades"
+            >
+
+            <div>
+                <b>GRADES</b>
+            </div>
+
+        </div>
+
+
+        <!-- ANNOUNCEMENT -->
+
+        <div
+            class="announce"
+            onclick="openAnnouncements()"
+        >
+
+            <img
+                src="https://cdn-icons-png.flaticon.com/512/942/942799.png"
+                width="50"
+                alt="Announcement"
+            >
+
+            <div>
+
+                <b>ANNOUNCEMENT</b>
+
+                <br>
+
+                <span style="font-size:12px">
+                    Check latest updates from your department
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!--SUBJECTS-->
+
+<div class="page" id="subjects">
+
+    <div class="header">
+
+        <span onclick="goBack()">←</span>
+
+        <span>My Subjects</span>
+
+        <span></span>
+
+    </div>
+
+    <div class="title">
+        My Subjects
+    </div>
+
+    <div class="subtitle">
+        View your enrolled subjects and instructors
+    </div>
+
+    <div class="info-card">
+
+        <h3>💻 HUMCOMP</h3>
+
+        <p>
+            <b>Human Computer Interaction</b>
+        </p>
+
+        <p>
+            Instructor: Mr. Jomar Cris Estilloso
+        </p>
+
+        <p>
+            Units: 3
+        </p>
+
+    </div>
+
+    <div class="info-card">
+
+        <h3>📐 QUANMET</h3>
+
+        <p>
+            <b>Quantitative Method</b>
+        </p>
+
+        <p>
+            Instructor: Mrs. Sandy Cheeks
+        </p>
+
+        <p>
+            Units: 3
+        </p>
+
+    </div>
+
+    <div class="info-card">
+
+        <h3>💻 INTPROG</h3>
+
+        <p>
+            <b>Integrative Programming</b>
+        </p>
+
+        <p>
+            Instructor: Mr. Patrick Star
+        </p>
+
+        <p>
+            Units: 3
+        </p>
+
+    </div>
+
+</div>
+
+
+<!--GRADES-->
+
+<div class="page" id="grades">
+
+    <div class="header">
+
+        <span onclick="goBack()">←</span>
+
+        <span>My Grades</span>
+
+        <span></span>
+
+    </div>
+
+    <div class="title">
+        My Grades
+    </div>
+
+    <div class="subtitle">
+        View your current subject grades
+    </div>
+
+    <div class="grade-card">
+
+        <div class="grade-info">
+
+            <b>HUMCOMP</b>
+
+            <span>
+                Human Computer Interaction
+            </span>
+
+        </div>
+
+        <div class="grade-value">
+            1.50
+        </div>
+
+    </div>
+
+    <div class="grade-card">
+
+        <div class="grade-info">
+
+            <b>QUANMET</b>
+
+            <span>
+                Quantitative Method
+            </span>
+
+        </div>
+
+        <div class="grade-value">
+            1.75
+        </div>
+
+    </div>
+
+    <div class="grade-card">
+
+        <div class="grade-info">
+
+            <b>INTPROG</b>
+
+            <span>
+                Integrative Programming
+            </span>
+
+        </div>
+
+        <div class="grade-value">
+            1.50
+        </div>
+
+    </div>
+
+</div>
+
+
+<!--SCHEDULE-->
+
+<div class="page" id="schedule">
+
+    <div class="header">
+
+        <span onclick="goBack()">←</span>
+
+        <span>My Schedule</span>
+
+        <span></span>
+
+    </div>
+
+    <div class="title">
+        Class Schedule
+    </div>
+
+    <div class="subtitle">
+        Your weekly class schedule
+    </div>
+
+    <div class="schedule-card">
+
+        <h3>HUMCOMP</h3>
+
+        <div class="schedule-row">
+            <span>Subject</span>
+            <b>Human Computer Interaction</b>
+        </div>
+
+        <div class="schedule-row">
+            <span>Days</span>
+            <b>Monday, Thursday</b>
+        </div>
+
+        <div class="schedule-row">
+            <span>Time</span>
+            <b>5:30 - 8:00 PM</b>
+        </div>
+
+        <div class="schedule-row">
+            <span>Instructor</span>
+            <b>Mr. Jomar Cris Estilloso</b>
+        </div>
+
+    </div>
+
+    <div class="schedule-card">
+
+        <h3>QUANMET</h3>
+
+        <div class="schedule-row">
+            <span>Subject</span>
+            <b>Quantitative Method</b>
+        </div>
+
+        <div class="schedule-row">
+            <span>Days</span>
+            <b>Tuesday, Friday</b>
+        </div>
+
+        <div class="schedule-row">
+            <span>Time</span>
+            <b>3:00 - 5:00 PM</b>
+        </div>
+
+        <div class="schedule-row">
+            <span>Instructor</span>
+            <b>Mrs. Sandy Cheeks</b>
+        </div>
+
+    </div>
+
+    <div class="schedule-card">
+
+        <h3>INTPROG</h3>
+
+        <div class="schedule-row">
+            <span>Subject</span>
+            <b>Integrative Programming</b>
+        </div>
+
+        <div class="schedule-row">
+            <span>Days</span>
+            <b>Wednesday</b>
+        </div>
+
+        <div class="schedule-row">
+            <span>Time</span>
+            <b>1:00 - 4:00 PM</b>
+        </div>
+
+        <div class="schedule-row">
+            <span>Instructor</span>
+            <b>Mr. Patrick Star</b>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!--NOTIFICATIONS-->
+
+<div class="page" id="notifications">
+
+    <div class="header">
+
+        <span onclick="goBack()">←</span>
+
+        <span>Notifications</span>
+
+        <span></span>
+
+    </div>
+
+    <div class="title">
+        Notifications
+    </div>
+
+    <div class="subtitle">
+        Stay updated with your latest notifications
+    </div>
+
+    <div
+        class="notification-card notification-unread"
+        onclick="readNotification(this)"
+    >
+
+        <div class="notification-icon">
+            📢
+        </div>
+
+        <div class="notification-content">
+
+            <h3>
+                New Department Announcement
+            </h3>
+
+            <p>
+                A new announcement has been posted by your department.
+                Tap to mark this notification as read.
+            </p>
+
+            <div class="notification-time">
+                Today • 9:30 AM
+            </div>
+
+        </div>
+
+    </div>
+
+    <div
+        class="notification-card notification-unread"
+        onclick="readNotification(this)"
+    >
+
+        <div class="notification-icon">
+            📝
+        </div>
+
+        <div class="notification-content">
+
+            <h3>
+                Grade Update
+            </h3>
+
+            <p>
+                Your grades have been updated. Check the Grades section
+                to view your latest results.
+            </p>
+
+            <div class="notification-time">
+                Yesterday • 4:15 PM
+            </div>
+
+        </div>
+
+    </div>
+
+    <div
+        class="notification-card notification-unread"
+        onclick="readNotification(this)"
+    >
+
+        <div class="notification-icon">
+            🗓️
+        </div>
+
+        <div class="notification-content">
+
+            <h3>
+                Schedule Reminder
+            </h3>
+
+            <p>
+                You have an upcoming HUMCOMP class on Monday at 5:30 PM.
+            </p>
+
+            <div class="notification-time">
+                Yesterday • 8:00 AM
+            </div>
+
+        </div>
+
+    </div>
+
+    <div
+        class="notification-card"
+        onclick="readNotification(this)"
+    >
+
+        <div class="notification-icon">
+            ✅
+        </div>
+
+        <div class="notification-content">
+
+            <h3>
+                Attendance Recorded
+            </h3>
+
+            <p>
+                Your attendance for HUMCOMP has been successfully recorded.
+            </p>
+
+            <div class="notification-time">
+                Aug 27, 2026 • 9:41 PM
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!--ANNOUNCEMENTS-->
+
+<div class="page" id="announcements">
+
+    <div class="header">
+
+        <span onclick="goBack()">←</span>
+
+        <span>Announcements</span>
+
+        <span></span>
+
+    </div>
+
+    <div class="title">
+        Announcements
+    </div>
+
+    <div class="subtitle">
+        Latest updates from your department
+    </div>
+
+    <div class="announcement-card">
+
+        <div class="announcement-header">
+
+            <div class="announcement-icon">
+                📢
+            </div>
+
+            <div>
+
+                <h3>
+                    Department Meeting
+                </h3>
+
+                <span class="announcement-date">
+                    September 11, 2026
+                </span>
+
+            </div>
+
+        </div>
+
+        <p>
+            Students are reminded to check their class schedules
+            and attend all scheduled activities. Please contact your
+            instructor if you have any questions.
+        </p>
+
+    </div>
+
+    <div class="announcement-card">
+
+        <div class="announcement-header">
+
+            <div class="announcement-icon">
+                📚
+            </div>
+
+            <div>
+
+                <h3>
+                    Academic Reminder
+                </h3>
+
+                <span class="announcement-date">
+                    September 9, 2026
+                </span>
+
+            </div>
+
+        </div>
+
+        <p>
+            Please make sure that all required academic activities
+            and requirements are submitted before their respective
+            deadlines.
+        </p>
+
+    </div>
+
+    <div class="announcement-card">
+
+        <div class="announcement-header">
+
+            <div class="announcement-icon">
+                🎓
+            </div>
+
+            <div>
+
+                <h3>
+                    Student Portal Update
+                </h3>
+
+                <span class="announcement-date">
+                    September 5, 2026
+                </span>
+
+            </div>
+
+        </div>
+
+        <p>
+            The student portal has been updated with improved access
+            to subjects, grades, schedules, attendance, notifications,
+            and department announcements.
+        </p>
+
+    </div>
+
+</div>
+
+
+<!--ATTENDANCE-->
+
+<div class="page" id="attendance">
+
+    <div class="header">
+
+        <span onclick="goBack()">←</span>
+
+        <span>My Attendance</span>
+
+        <span></span>
+
+    </div>
+
+    <div class="title">
+        View Your attendance details
+    </div>
+
+    <div class="subtitle">
+        Select a subject to see more information
+    </div>
+
+    <div>
+        <b>My Subject</b>
+    </div>
+
+
+    <!-- HUMCOMP -->
+
+    <div
+        class="subject-card"
+        onclick="openAttendanceDetails()"
+    >
+
+        <img
+            src="https://cdn-icons-png.flaticon.com/512/29/29302.png"
+            alt="Computer"
+        >
+
+        <div>
+
+            <b>
+                HUMCOMP - Human Computer Interaction
+            </b>
+
+            <div style="font-size:12px; margin-top:5px">
+                Present: 8 &nbsp;
+                Absent: 0 &nbsp;
+                Late: 4
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- QUANMET -->
+
+    <div
+        class="subject-card"
+        onclick="openQuanmetAttendance()"
+    >
+
+        <img
+            src="https://cdn-icons-png.flaticon.com/512/2991/2991148.png"
+            alt="Mathematics"
+        >
+
+        <div>
+
+            <b>
+                QUANMET - Quantitative Method
+            </b>
+
+            <div style="font-size:12px; margin-top:5px">
+                Present: 7 &nbsp;
+                Absent: 1 &nbsp;
+                Late: 4
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- INTPROG -->
+
+    <div
+        class="subject-card"
+        onclick="openIntprogAttendance()"
+    >
+
+        <img
+            src="https://cdn-icons-png.flaticon.com/512/1005/1005141.png"
+            alt="Programming"
+        >
+
+        <div>
+
+            <b>
+                INTPROG - Integrative Programming
+            </b>
+
+            <div style="font-size:12px; margin-top:5px">
+                Present: 5 &nbsp;
+                Absent: 3 &nbsp;
+                Late: 4
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- HUMCOMP ATTENDANCE DETAILS -->
+
+<div class="page" id="details">
+
+    <div class="header">
+
+        <span onclick="goBack()">←</span>
+
+        <span>HUMCOMP Attendance</span>
+
+        <span></span>
+
+    </div>
+
+    <div class="detail-card">
+
+        <h2>HUMCOMP</h2>
+
+        <div style="font-size:13px; margin-bottom:10px">
+            Human Computer Interaction
+        </div>
+
+        <div style="font-size:13px;margin:10px 0">
+
+            Instructor : Mr. Jomar Cris Estilloso
+
+            <br>
+
+            Schedule : Monday, Thursday
+
+            <br>
+
+            Time : 5:30 - 8:00 PM
+
+        </div>
+
+        <b>Attendance Summary</b>
+
+        <div class="summary">
+
+            <div class="sum-box present">
+                8<br>
+                Present ✅
+            </div>
+
+            <div class="sum-box late">
+                4<br>
+                Late ⏰
+            </div>
+
+            <div class="sum-box absent">
+                0<br>
+                Absent ❌
+            </div>
+
+            <div class="sum-box total">
+                12<br>
+                Total
+            </div>
+
+        </div>
+
+        <b>Attendance History:</b>
+
+        <div class="history">
+
+            <div>
+                AUG 10, 2026
+
+                <span>
+                    <span
+                        class="dot"
+                        style="background:green"
+                    ></span>
+                    Present
+                </span>
+            </div>
+
+            <div>
+                AUG 13, 2026
+
+                <span>
+                    <span
+                        class="dot"
+                        style="background:green"
+                    ></span>
+                    Present
+                </span>
+            </div>
+
+            <div>
+                AUG 17, 2026
+
+                <span>
+                    <span
+                        class="dot"
+                        style="background:orange"
+                    ></span>
+                    Late
+                </span>
+            </div>
+
+            <div>
+                AUG 20, 2026
+
+                <span>
+                    <span
+                        class="dot"
+                        style="background:green"
+                    ></span>
+                    Present
+                </span>
+            </div>
+
+            <div>
+                AUG 27, 2026
+
+                <span>
+                    <span
+                        class="dot"
+                        style="background:green"
+                    ></span>
+                    Present
+                </span>
+            </div>
+
+        </div>
+
+        <button
+            class="btn"
+            onclick="showSuccess('HUMCOMP')"
+        >
+            ✓ DONE
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- QUANMET ATTENDANCE DETAILS -->
+
+<div class="page" id="quanmet-details">
+
+    <div class="header">
+
+        <span onclick="goBack()">←</span>
+
+        <span>QUANMET Attendance</span>
+
+        <span></span>
+
+    </div>
+
+    <div class="detail-card">
+
+        <h2>QUANMET</h2>
+
+        <div style="font-size:13px; margin-bottom:10px">
+            Quantitative Method
+        </div>
+
+        <div style="font-size:13px;margin:10px 0">
+
+            Instructor : Mrs. Sandy Cheeks
+
+            <br>
+
+            Schedule : Tuesday, Friday
+
+            <br>
+
+            Time : 3:00 - 5:00 PM
+
+        </div>
+
+        <b>Attendance Summary</b>
+
+        <div class="summary">
+
+            <div class="sum-box present">
+                7<br>
+                Present ✅
+            </div>
+
+            <div class="sum-box late">
+                4<br>
+                Late ⏰
+            </div>
+
+            <div class="sum-box absent">
+                1<br>
+                Absent ❌
+            </div>
+
+            <div class="sum-box total">
+                12<br>
+                Total
+            </div>
+
+        </div>
+
+        <b>Attendance History:</b>
+
+        <div class="history">
+
+            <div>
+                AUG 11, 2026
+
+                <span>
+                    <span
+                        class="dot"
+                        style="background:green"
+                    ></span>
+                    Present
+                </span>
+            </div>
+
+            <div>
+                AUG 14, 2026
+
+                <span>
+                    <span
+                        class="dot"
+                        style="background:orange"
+                    ></span>
+                    Late
+                </span>
+            </div>
+
+            <div>
+                AUG 18, 2026
+
+                <span>
+                    <span
+                        class="dot"
+                        style="background:green"
+                    ></span>
+                    Present
+                </span>
+            </div>
+
+            <div>
+                AUG 21, 2026
+
+                <span>
+                    <span
+                        class="dot"
+                        style="background:red"
+                    ></span>
+                    Absent
+                </span>
+            </div>
+
+            <div>
+                AUG 25, 2026
+
+                <span>
+                    <span
+                        class="dot"
+                        style="background:orange"
+                    ></span>
+                    Late
+                </span>
+            </div>
+
+            <div>
+                AUG 28, 2026
+
+                <span>
+                    <span
+                        class="dot"
+                        style="background:green"
+                    ></span>
+                    Present
+                </span>
+            </div>
+
+        </div>
+
+        <button
+            class="btn"
+            onclick="showSuccess('QUANMET')"
+        >
+            ✓ DONE
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- INTPROG ATTENDANCE DETAILS -->
+
+<div class="page" id="intprog-details">
+
+    <div class="header">
+
+        <span onclick="goBack()">←</span>
+
+        <span>INTPROG Attendance</span>
+
+        <span></span>
+
+    </div>
+
+    <div class="detail-card">
+
+        <h2>INTPROG</h2>
+
+        <div style="font-size:13px; margin-bottom:10px">
+            Integrative Programming
+        </div>
+
+        <div style="font-size:13px;margin:10px 0">
+
+            Instructor : Mr. Patrick Star
+
+            <br>
+
+            Schedule : Wednesday
+
+            <br>
+
+            Time : 1:00 - 4:00 PM
+
+        </div>
+
+        <b>Attendance Summary</b>
+
+        <div class="summary">
+
+            <div class="sum-box present">
+                5<br>
+                Present ✅
+            </div>
+
+            <div class="sum-box late">
+                4<br>
+                Late ⏰
+            </div>
+
+            <div class="sum-box absent">
+                3<br>
+                Absent ❌
+            </div>
+
+            <div class="sum-box total">
+                12<br>
+                Total
+            </div>
+
+        </div>
+
+        <b>Attendance History:</b>
+
+        <div class="history">
+
+            <div>
+                AUG 12, 2026
+
+                <span>
+                    <span
+                        class="dot"
+                        style="background:green"
+                    ></span>
+                    Present
+                </span>
+            </div>
+
+            <div>
+                AUG 19, 2026
+
+                <span>
+                    <span
+                        class="dot"
+                        style="background:orange"
+                    ></span>
+                    Late
+                </span>
+            </div>
+
+            <div>
+                AUG 26, 2026
+
+                <span>
+                    <span
+                        class="dot"
+                        style="background:red"
+                    ></span>
+                    Absent
+                </span>
+            </div>
+
+            <div>
+                SEP 2, 2026
+
+                <span>
+                    <span
+                        class="dot"
+                        style="background:green"
+                    ></span>
+                    Present
+                </span>
+            </div>
+
+            <div>
+                SEP 9, 2026
+
+                <span>
+                    <span
+                        class="dot"
+                        style="background:orange"
+                    ></span>
+                    Late
+                </span>
+            </div>
+
+        </div>
+
+        <button
+            class="btn"
+            onclick="showSuccess('INTPROG')"
+        >
+            ✓ DONE
+        </button>
+
+    </div>
+
+</div>
+
+
+<!--SUCCESS-->
+
+<div class="page" id="success">
+
+    <div class="success">
+
+        <div class="icon">
+            ✓
+        </div>
+
+        <h1>
+            Success!
+        </h1>
+
+        <p
+            style="opacity:0.9; margin:10px 0 20px"
+        >
+            Attendance details have been viewed successfully
+        </p>
+
+        <div
+            class="detail-card"
+            style="text-align:left"
+        >
+
+            <b id="success-subject">
+                HUMCOMP
+            </b>
+
+            <br>
+
+            <span
+                id="success-subject-name"
+                style="font-size:13px"
+            >
+                Human Computer Interaction
+            </span>
+
+            <div
+                style="
+                    border:1px solid #ddd;
+                    padding:12px;
+                    border-radius:8px;
+                    margin-top:10px;
+                    font-size:13px
+                "
+            >
+
+                <b>Date & Time</b>
+
+                <br>
+
+                <span id="success-date">
+                    Aug 27, 2026 • 9:41 PM
+                </span>
+
+            </div>
+
+        </div>
+
+        <button
+            class="btn"
+            onclick="showPage('attendance')"
+        >
+            🏠 Back to My Attendance
+        </button>
+
+        <button
+            class="btn"
+            style="background:white; color:#4f46e5"
+            onclick="showPage('dashboard')"
+        >
+            Go to Dashboard
+        </button>
+
+    </div>
+
+</div>
+
+</div>
+
+
+<!-- BACKGROUND WAVES -->
+
+<svg
+    class="waves"
+    viewBox="0 0 1440 320"
+>
+    <path
+        fill="#7c3aed"
+        d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,229.3C672,256,768,288,864,277.3C960,267,1056,213,1152,186.7C1248,160,1344,160,1392,160L1440,160L1440,320L0,320Z"
+    ></path>
+</svg>
+
+<script src="script.js"></script>
+
+</body>
+</html>
